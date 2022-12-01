@@ -3,12 +3,14 @@ FROM docker.io/library/golang:1.17 AS builder
 COPY . /code
 WORKDIR /code
 
-RUN go build \
+RUN CGO_ENABLED=0 go build \
   -o ./build/eventshub \
   knative.dev/reconciler-test/cmd/eventshub
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
-COPY --from=builder /code/build/eventshub /ko-app/eventshub
+COPY --from=builder /code/build/eventshub /app/eventshub
 
-ENTRYPOINT ["/ko-app/eventshub"]
+USER 65532
+
+ENTRYPOINT ["/app/eventshub"]

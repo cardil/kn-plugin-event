@@ -1,8 +1,6 @@
 name: Multiarch builds
 
-on:
-  push:
-    branches: [ 'release-*' ]
+on: push
 
 jobs:
   build-image:
@@ -17,4 +15,3 @@ jobs:
     with:
       image: ${{ matrix.image }}
       containerfile: .github/workflows/images/${{ matrix.image }}/Containerfile
-      platforms: linux/amd64, linux/ppc64le
