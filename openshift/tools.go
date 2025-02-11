@@ -1,5 +1,5 @@
 package openshift
 
 import (
-	_ "github.com/cardil/deviate/cmd/deviate"
+	_ "github.com/openshift-knative/deviate/cmd/deviate"
 )
